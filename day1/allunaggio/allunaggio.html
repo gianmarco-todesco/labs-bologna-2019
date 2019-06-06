@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Allunaggio</title>
+<style>
+canvas { 
+  border:solid 1px black;
+  box-shadow: 10px 10px 5px #888888;
+  background:url(moon3.jpg);
+}
+</style>
+</head>
+<body>
+<h1>Allunaggio</h1>
+<canvas id="view" width="800" height="600"></canvas>
+<p>
+Usa i tasti <b>A</b> e <b>D</b> per ruotare il modulo di allunaggio e
+premi il tasto <b>W</b> per accendere i razzi. Premi il tasto <b>R</b> per ricominciare.
+</p>
+<p>
+Devi atterrare nel cratere giallo, con una velocit&agrave; di discesa
+non troppo alta.
+</p>
+<p>Buona fortuna</p>
+<hr>
+<img id="razzo" src="razzo_75.png" style="visibility:hidden"/>
+<img id="fiamme" src="flame_50.png" style="visibility:hidden"/>
+<script src="allunaggio.js"></script>
+</body>
+</html>

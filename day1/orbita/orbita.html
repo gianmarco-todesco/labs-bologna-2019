@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head><title>Orbita</title></head>
+<body>
+<canvas id="view" width="800" height="800"></canvas>
+<img src="terra.png" id="terra" style="visibility:hidden"/>
+<img src="satellite.png" id="satellite" style="visibility:hidden"/>
+<img src="kaboom.png" id="kaboom" style="visibility:hidden"/>
+<script>
+// ----- qui comincia il programma --------------------------------------------
+
+var canvas = document.getElementById('view');           // canvas = l'area in cui disegno
+var ctx = canvas.getContext('2d');                      // ctx = lo strumento per disegnare
+var terra = document.getElementById('terra');           // immagine della terra
+var satellite = document.getElementById('satellite');   // immagine del satellite
+var kaboom = document.getElementById('kaboom');         // scritta "kaboom" (quando il satellite si scontra)
+
+var x = 300, y = 0;      // (x,y) = posizione
+var vx = 0, vy = 100;    // (vx,vy) = velocità. N. prova a cambiare vy. Ad es. prova vy = 90
+
+var GM = 5000000.0;      // GM = la costante di gravitazione universale * la massa della terra
+                         // N.B. la simulazione usa unità di misura bislacche (ad es. pixel), quindi queste
+                         // costanti non hanno lo stesso valore di quelle vere
+
+// La funzione viene calcola_e_disegna() chiamata continuamente, tante volte al secondo.
+// Fa tutti i calcoli e disegna il nuovo fotogramma
+function calcola_e_disegna() {
+    ctx.setTransform(1,0,0,1,0,0);                      // definisco le coordinate
+    ctx.clearRect(0, 0, canvas.width, canvas.height);   // cancello il fotogramma precedente
+    ctx.translate(400,400);                             // metto l'origine degli assi al centro
+
+    ctx.drawImage(terra, -100,-100);                    // disegno la terra...
+    ctx.drawImage(satellite, x-25,y-25);                // ... e il satellite
+
+    // qui sotto c'� la fisica!
+    var t = 0.040;                       // suppongo siano passati 40 millesimi di secondo fra un fotogramma e l'altro
+    var r = Math.sqrt(x*x+y*y);          // r = la distanza fra il satellite e il centro della terra
+    if(r<100) {                          // crash? se si
+      ctx.drawImage(kaboom,x-90,y-50);   //   disegna "Kaboom"
+      return;                            //   e interrompi l'esecuzione del programma
+    }
+    var acc = -GM/(r*r);                 // calcolo l'accelerazione dovuta alla gravità
+    var accx = acc*(x/r);                // accx e accy sono le componenti orizzontale e verticale dell'accelerazione
+    var accy = acc*(y/r);
+    vx = vx + t*accx;                    // aggiorno il valore delle velocità
+    vy = vy + t*accy;
+    x = x + t*vx;                        // e infinte calcolo la nuova posizione
+    y = y + t*vy;
+
+    // chiedo al sistema di richiamare calcola_e_disegna() il prima possibile
+    window.requestAnimationFrame(calcola_e_disegna);
+}
+// comincio!
+calcola_e_disegna();
+//---- fine del programma -----------------------------------------------------
+</script>
+</body>
+</html>

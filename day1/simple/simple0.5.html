@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simple0.5</title>
+        <style>
+            canvas { 
+                border: 1px solid black; 
+                box-shadow: 10px 10px 30px gray;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Il mio piccolo test</h1>
+        <canvas id="view" width="400" height="400"></canvas>
+        <script>
+            var canvas = document.getElementById("view");
+            var ctx = canvas.getContext("2d");
+
+            function disegna() {
+                ctx.clearRect(0,0,400,400);
+                var t = performance.now() * 0.001;
+                var i,n = 40;
+                for(i=0; i<n; i++) {
+                    var r = 10 + 4*i;
+                    var phi = 3*Math.PI*i/n*t * 0.5;
+                    ctx.beginPath();
+                    ctx.arc(200,200,r,phi,phi+Math.PI);
+                    ctx.stroke();
+                }
+                requestAnimationFrame(disegna);
+            }
+            disegna();
+        </script>
+    </body>
+</html>

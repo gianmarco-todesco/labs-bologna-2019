@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>dragon</title>
+</head>
+<body>
+<h1>Curva del drago</h1>
+<canvas id="c" width="800" height="600"></canvas>
+
+<script>
+
+var canvas = document.getElementById('c');
+var ctx = canvas.getContext('2d');
+
+function dragon(x0,y0,x1,y1, level) {
+    if(level==0) {
+        ctx.moveTo(x0,y0);
+        ctx.lineTo(x1,y1);
+    } else {
+        var xm = (x0+x1)/2;
+        var ym = (y0+y1)/2;
+        var dx = x1-xm;
+        var dy = y1-ym;
+        var x2 = xm - dy;
+        var y2 = ym + dx;
+        dragon(x0,y0,x2,y2,level-1);
+        dragon(x1,y1,x2,y2,level-1);        
+    }
+}
+
+function draw() {
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.beginPath();
+    dragon(100,100,600,100,15);
+    ctx.stroke();
+}
+
+draw();
+
+canvas.addEventListener('mousemove', function(e) {
+    var x = e.offsetX, y = e.offsetY;
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.beginPath();
+    dragon(100,100,x,y,15);
+    ctx.stroke();
+    }, false);
+
+</script>
+</body>

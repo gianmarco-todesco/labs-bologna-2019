@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simple3.0</title>
+        <style>
+            canvas { 
+                border: 1px solid black; 
+                box-shadow: 10px 10px 30px gray;
+            }
+            .buttons {
+                margin:10px;
+            }
+        </style>
+        <script src="simple3.0.js"></script>
+    </head>
+    <body onload="inizia()">
+        <h1>simple 3.0</h1>
+        
+        <div class="buttons">
+            <button onclick="beep()">Beep</button>
+            <button onclick="boop()">Boop</button>
+        </div>
+        <div>
+            <canvas id="view" width="800" height="100"></canvas>
+        </div>
+    </body>
+</html>

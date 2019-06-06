@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>simple2.2</title>
+        <style>
+            canvas { 
+                border: 1px solid black; 
+                box-shadow: 10px 10px 30px gray;
+            }
+            .buttons {
+                margin:10px;
+            }
+        </style>
+        <script src="simple2.1.js"></script>
+    </head>
+    <body onload="disegna()">
+        <h1>simple 2.2</h1>
+        <div class="buttons">
+            <button onclick="stella(5,2)">{5,2}</button>
+            <button onclick="stella(7,3)">{7,3}</button>
+            <button onclick="stella(11,6)">{11,6}</button>
+            <button onclick="stella(11,7)">{11,7}</button>        
+        </div>
+        <div>
+            <canvas id="view" width="600" height="600"></canvas>
+        </div>
+    </body>
+</html>
