@@ -5,6 +5,7 @@
 <canvas id="view" width="800" height="800"></canvas>
 <img src="terra.png" id="terra" style="visibility:hidden"/>
 <img src="satellite.png" id="satellite" style="visibility:hidden"/>
+<img src="cat.png" id="cat" style="visibility:hidden"/>
 <img src="kaboom.png" id="kaboom" style="visibility:hidden"/>
 <script>
 // ----- qui comincia il programma --------------------------------------------
@@ -30,7 +31,7 @@ function calcola_e_disegna() {
     ctx.translate(400,400);                             // metto l'origine degli assi al centro
 
     ctx.drawImage(terra, -100,-100);                    // disegno la terra...
-    ctx.drawImage(satellite, x-25,y-25);                // ... e il satellite
+    ctx.drawImage(cat, x-25,y-25);                // ... e il satellite
 
     // qui sotto c'� la fisica!
     var t = 0.040;                       // suppongo siano passati 40 millesimi di secondo fra un fotogramma e l'altro
@@ -44,6 +45,8 @@ function calcola_e_disegna() {
     var accy = acc*(y/r);
     vx = vx + t*accx;                    // aggiorno il valore delle velocità
     vy = vy + t*accy;
+    vx = vx * 0.9999;
+    vy = vy * 0.9999;
     x = x + t*vx;                        // e infinte calcolo la nuova posizione
     y = y + t*vy;
 

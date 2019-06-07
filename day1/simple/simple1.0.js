@@ -6,12 +6,15 @@ function inizia() {
     disegna();
 }
 
+questa riga è tutta sbagliata
+
+
 function disegna() {
     const width = canvas.width;
     const height = canvas.height;
     const cx = width/2;
     const cy = height/2;
-        
+
     ctx.clearRect(0,0,width,height);
     var t = performance.now() * 0.001;
     var i,n = 40;
